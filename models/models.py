@@ -8,3 +8,6 @@ class Cita(models.Model):
     _description = 'imcitas.cita'
 
     name = fields.Char()
+    start_date = fields.Datetime()
+    end_date = fields.Datetime()
+    duration = fields.Float()

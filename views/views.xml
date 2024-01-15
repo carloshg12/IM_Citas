@@ -12,14 +12,30 @@
       </field>
     </record>
 
+    <record model="ir.ui.view" id="imcitas.cita_calendar">
+      <field name="name">imcitas.cita.calendar</field>
+      <field name="model">imcitas.cita</field>
+      <field name="arch" type="xml">
+        <calendar date_start="start_date" date_stop="end_date">
+            <field name="name"/>
+            <field name="duration"/>
+        </calendar>
+      </field>
+    </record>
 
     <!-- Action Window -->
     <record model="ir.actions.act_window" id="imcitas.cita_action_window">
       <field name="name">imcitas.cita.action_window</field>
       <field name="res_model">imcitas.cita</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">tree,form,calendar</field>
     </record>
 
+<!--
+    <record model="ir.actions.act_window" id="imcitas.citacalendar_action_window">
+      <field name="name">imcitas.cita.action_window</field>
+      <field name="res_model">imcitas.cita</field>
+      <field name="view_mode">calendar</field>
+    </record> -->
 
     <!-- server action to the one above -->
 <!--
