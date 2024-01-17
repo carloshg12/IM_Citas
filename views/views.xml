@@ -21,53 +21,97 @@
             <field name="duration"/>
         </calendar>
       </field>
+    </record> 
+
+      <record model="ir.ui.view" id="imcitas.consultoria_tree">
+      <field name="name">imcitas.consultoria.tree</field>
+      <field name="model">imcitas.consultoria</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="duration"/>
+          <field name="cost"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="imcitas_consultoria_form_view" model="ir.ui.view">
+        <field name="name">imcitas.consultoria.form</field>
+        <field name="model">imcitas.consultoria</field>
+        <field name="arch" type="xml">
+            <form string="Consultoría">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="Nombre de la Consulta"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="duration" widget="duration"/>
+                            <field name="cost"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+        <record model="ir.ui.view" id="imcitas.calculadora_view">
+      <field name="name">imcitas.calculadora.tree</field>
+      <field name="model">imcitas.calculadora</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="consultoria_ids"/>
+          <field name="total_duration"/>
+          <field name="total_cost"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="imcitas.gestor_tree">
+      <field name="name">imcitas.gestor.tree</field>
+      <field name="model">imcitas.gestor</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
     </record>
 
     <!-- Action Window -->
+    <record model="ir.actions.act_window" id="imcitas.consultoria_action_window">
+      <field name="name">imcitas.consultoria.action_window</field>
+      <field name="res_model">imcitas.consultoria</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
     <record model="ir.actions.act_window" id="imcitas.cita_action_window">
       <field name="name">imcitas.cita.action_window</field>
       <field name="res_model">imcitas.cita</field>
       <field name="view_mode">tree,form,calendar</field>
     </record>
-
-<!--
-    <record model="ir.actions.act_window" id="imcitas.citacalendar_action_window">
-      <field name="name">imcitas.cita.action_window</field>
-      <field name="res_model">imcitas.cita</field>
-      <field name="view_mode">calendar</field>
-    </record> -->
-
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="imcitas.action_server">
-      <field name="name">imcitas server</field>
-      <field name="model_id" ref="model_imcitas_imcitas"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
+    
+    <record model="ir.actions.act_window" id="imcitas.calculadora_action_window">
+      <field name="name">imcitas.calculadora.action_window</field>
+      <field name="res_model">imcitas.calculadora</field>
+      <field name="view_mode">tree,form</field>
     </record>
--->
+
+    <record model="ir.actions.act_window" id="imcitas.gestor_action_window">
+      <field name="name">imcitas.gestor.action_window</field>
+      <field name="res_model">imcitas.gestor</field>
+      <field name="view_mode">tree,form</field>
+    </record>
 
     <!-- Top menu item -->
 
     <menuitem name="IM Citas" id="imcitas.menu_root"/>
     <menuitem name="Cita" id="imcitas.cita_menu" parent="imcitas.menu_root" action="imcitas.cita_action_window"/>
-    <!-- menu categories -->
-<!--
-    menuitem name="Menu 1" id="imcitas.menu_1" parent="imcitas.menu_root"/>
-    <menuitem name="Menu 2" id="imcitas.menu_2" parent="imcitas.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="imcitas.menu_1_list" parent="imcitas.menu_1"
-              action="imcitas.action_window"/>
-    <menuitem name="Server to list" id="imcitas" parent="imcitas.menu_2"
-              action="imcitas.action_server"/>
--->
+    <menuitem name="Consultoria" id="imcitas.consultoria_menu" parent="imcitas.menu_root" action="imcitas.consultoria_action_window"/>
+    <menuitem name="Tipos de Consulta" id="imcitas.tiposconsulta_menu" parent="imcitas.consultoria_menu" action="imcitas.consultoria_action_window"/>
+    <menuitem name="Calculadora" id="imcitas.calculadora_menu" parent="imcitas.consultoria_menu" action="imcitas.calculadora_action_window"/>
+    <menuitem name="Gestores" id="imcitas.gestor_menu" parent="imcitas.menu_root" action="imcitas.gestor_action_window"/>
   </data>
 </odoo>

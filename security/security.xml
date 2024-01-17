@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="gestor_jefe" model="res.groups">
+        <field name="name">Lapeliculera / Jefe </field>
+    </record>
+    <record id="gestor_becario" model="res.groups">
+        <field name="name"> LaPeliculera / Becario </field>
+    </record>
+</odoo>
