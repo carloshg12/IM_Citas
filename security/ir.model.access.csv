@@ -1,2 +1,12 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 imcitas_gestor_jefe,Gestor Jefe,model_imcitas_gestor,imcitas_jefe,1,1,1,1
+imcitas_consultoria_jefe,Gestor Jefe,model_imcitas_consultoria,imcitas_jefe,1,1,1,1
+imcitas_cita_jefe,Gestor Jefe,model_imcitas_cita,imcitas_jefe,1,1,1,1
+imcitas_calculadora_jefe,Gestor Jefe,model_imcitas_calculadora,imcitas_jefe,1,1,1,1
+imcitas_cliente_jefe,Gestor Jefe,model_imcitas_cliente,imcitas_jefe,1,1,1,1
+
+imcitas_consultoria_gestor,Gestor,model_imcitas_consultoria,imcitas_gestor,1,1,1,1
+imcitas_cita_gestor,Gestor,model_imcitas_cita,imcitas_gestor,1,1,1,1
+imcitas_calculadora_gestor,Gestor,model_imcitas_calculadora,imcitas_gestor,1,1,1,1
+imcitas_calculadora_cliente,Gestor,model_imcitas_cliente,imcitas_gestor,1,1,1,1
+

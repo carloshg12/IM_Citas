@@ -47,6 +47,22 @@ class Calculadora(models.Model):
             record.total_cost = sum(consultoria.cost for consultoria in record.consultoria_ids)
 
 
+
+
+
+# -- Iker -- #
+            
+class Cliente(models.Model):
+    _name = 'imcitas.cliente'
+    _description = 'imcitas.cliente'
+
+    name = fields.Char()
+
+
+
+
+
+
 # -- Carlos y Jose -- #
 
 class Consultoria(models.Model):
@@ -62,3 +78,5 @@ class Gestor(models.Model):
     _description = 'imcitas.gestor'
 
     name = fields.Char()
+
+
