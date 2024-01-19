@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <report
+        id="imcitas.informe_calculadora"
+        string="Informe de Calculadoras"
+        model="imcitas.calculadora"
+        report_type="qweb-pdf"
+        name="imcitas.informe_calculadora_view"
+        file="imcitas.informe_calculadora_view"/>
+
+    <template id="informe_calculadora_view">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="calculadora">
+                <div class="page">
+                    <h1><span t-esc="calculadora.name"/></h1>
+                    <hr/>
+                    <h2>Consultorías Asociadas</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tipo de Cita</th>
+                                <th>Duración (minutos)</th>
+                                <th>Costo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="calculadora.consultoria_ids" t-as="consultoria">
+                                <tr>
+                                    <td><span t-esc="consultoria.name"/></td>
+                                    <td><span t-esc="consultoria.duration"/></td>
+                                    <td><span t-esc="consultoria.cost"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div>
+                        <strong>Duración Total: </strong>
+                        <span t-esc="calculadora.total_duration"/>
+                    </div>
+                    <div>
+                        <strong>Costo Total: </strong>
+                        <span t-esc="calculadora.total_cost"/>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

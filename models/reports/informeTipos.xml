@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <report
+        id="imcitas.informe_consultoria"
+        string="Informe sobre Consultorías"
+        model="imcitas.consultoria"
+        report_type="qweb-pdf"
+        name="imcitas.informe_consultoria_view"
+        file="imcitas.informe_consultoria_view"/>
+
+    <template id="informe_consultoria_view">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="consultoria">
+                <div class="page">
+                    <h1 t-field="consultoria.name"/>
+                    <div>
+                        <strong>Tipo de Cita: </strong>
+                        <span t-field="consultoria.name" />
+                    </div>
+                    <div>
+                        <strong>Duración (minutos): </strong>
+                        <span t-field="consultoria.duration"/>
+                    </div>
+                    <div>
+                        <strong>Costo: </strong>
+                        <span t-field="consultoria.cost"/>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

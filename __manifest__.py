@@ -27,6 +27,10 @@
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'reports/informeTipos.xml',
+        'reports/informeCalculadora.xml',
+
+
     ],
     # only loaded in demonstration mode
     'demo': [
