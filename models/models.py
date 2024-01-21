@@ -14,9 +14,10 @@ class Cita(models.Model):
     start_date = fields.Datetime(string="Hora de inicio", required=True)
     end_date = fields.Datetime("Hora de finalización")
     duration = fields.Float()
-    cliente_id =  fields.Char(string="Cliente", required=True)  # A falta de cambiar cuando haga Iker su parte
+    cliente_id =  fields.Many2one('imcitas.cliente',string="Cliente", required=True) 
     gestor_id = fields.Many2one('imcitas.gestor', string='Gestor', required=True)
     consultoria_id = fields.Many2many('imcitas.consultoria', string='Consultoría')
+    
 
     @api.onchange('consultoria_id', 'start_date')
     def _onchange_consultoria_id(self):
@@ -49,6 +50,24 @@ class Cita(models.Model):
 
                 if end_time < start_time:
                     raise ValidationError("La hora de finalización debe ser después de la hora de inicio.")
+                
+    @api.constrains('start_date', 'end_date', 'gestor_id')
+    def _check_gestor_availability(self):
+        for record in self:
+            if not (record.start_date and record.end_date and record.gestor_id):
+                continue  # Si falta alguna información, no realizar la comprobación
+
+            # Buscar otras citas con el mismo gestor en el mismo rango de tiempo
+            overlapping_citas = self.search([
+                ('id', '!=', record.id),  # Excluir la cita actual
+                ('gestor_id', '=', record.gestor_id.id),  # Mismo gestor
+                ('start_date', '<', record.end_date),  # Comienza antes de que termine esta cita
+                ('end_date', '>', record.start_date)  # Termina después de que comience esta cita
+            ])
+
+            if overlapping_citas:
+                raise ValidationError("Ya existe una cita con este gestor en el mismo rango de tiempo.")
+            
 
 
 # -- Carlos -- #
