@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from datetime import timedelta
+from datetime import timedelta, time
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 # -- Jose -- #
@@ -9,24 +10,45 @@ class Cita(models.Model):
     _name = 'imcitas.cita'
     _description = 'imcitas.cita'
 
-    name = fields.Char()
-    start_date = fields.Datetime()
-    end_date = fields.Datetime()
+    name = fields.Char(string="Asunto de la cita", required=True)
+    start_date = fields.Datetime(string="Hora de inicio", required=True)
+    end_date = fields.Datetime("Hora de finalización")
     duration = fields.Float()
+    cliente_id =  fields.Char(string="Cliente", required=True)  # A falta de cambiar cuando haga Iker su parte
+    gestor_id = fields.Many2one('imcitas.gestor', string='Gestor', required=True)
     consultoria_id = fields.Many2many('imcitas.consultoria', string='Consultoría')
 
     @api.onchange('consultoria_id', 'start_date')
     def _onchange_consultoria_id(self):
-            total_duration = 0
+        total_duration = 0
+        if self.consultoria_id:
             for consultoria in self.consultoria_id:
-                total_duration += consultoria.duration
+                total_duration += consultoria.duration if consultoria.duration else 0
 
-            self.duration = total_duration
+        self.duration = total_duration
 
-            if self.start_date:
-                # Convertir la duración total en minutos
-                duration_delta = timedelta(minutes=self.duration)
-                self.end_date = self.start_date + duration_delta
+        if self.start_date:
+            duration_delta = timedelta(minutes=self.duration)
+            self.end_date = self.start_date + duration_delta
+
+    @api.constrains('start_date', 'end_date')
+    def _check_time_range(self):
+        start_time_boundary = time(8, 0)  # 9:00 AM  Pongo 8 provisionalmente por el GMT +1
+        end_time_boundary = time(19, 0)  # 8:00 PM   Pongo 19 provisionalmente por el GMT +1
+
+        for record in self:
+            if record.start_date and record.end_date:
+                start_time = record.start_date.time()
+                end_time = record.end_date.time()
+
+                if not (start_time_boundary <= start_time <= end_time_boundary):
+                    raise ValidationError("La hora de inicio debe estar entre las 9:00 AM y las 8:00 PM.")
+
+                if not (start_time_boundary <= end_time <= end_time_boundary):
+                    raise ValidationError("La hora de finalización debe estar entre las 9:00 AM y las 8:00 PM.")
+
+                if end_time < start_time:
+                    raise ValidationError("La hora de finalización debe ser después de la hora de inicio.")
 
 
 # -- Carlos -- #

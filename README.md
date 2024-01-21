@@ -2,7 +2,7 @@ Guia de instalación y funcionalidades
 
 Instalación:
   
-  - Una vez descargues este repositorio,se recomienda renombrar el fichero sin "_" ya que puede ocasionar problemas.
+  - Una vez descargues este repositorio,se recomienda renombrar la carpeta del módulo sin "_" ya que puede ocasionar problemas.
   - Introduce la carpeta en addons de Odoo.
   - Actualiza tu lista de aplicaciones e instalala.
 
