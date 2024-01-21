@@ -73,14 +73,19 @@ class Calculadora(models.Model):
 
 
 # -- Iker -- #
-            
+
 class Cliente(models.Model):
     _name = 'imcitas.cliente'
     _description = 'imcitas.cliente'
 
-    name = fields.Char()
-
-
+    name = fields.Char(string="Nombre")
+    last_name = fields.Char(string="Apellidos")
+    email = fields.Char(string="Correo Electrónico")
+    phone = fields.Char(string="Teléfono")
+    street = fields.Char(string="Calle")
+    country = fields.Char(string="País")
+    city = fields.Char(string="Ciudad")
+    photo = fields.Binary(string='Foto')
 
 
 
