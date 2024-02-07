@@ -202,6 +202,52 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="imcitas.consultoria_graph">
+            <field name="name">imcitas.consultoria.graph</field>
+            <field name="model">imcitas.consultoria</field>
+            <field name="arch" type="xml">
+                <graph string="Análisis de Consultoría">
+                    <field name="name" type="row"/>
+                    <field name="duration" type="measure"/>
+                    <field name="cost" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="imcitas.cita_graph">
+            <field name="name">imcitas.cita.graph</field>
+            <field name="model">imcitas.cita</field>
+            <field name="arch" type="xml">
+                <graph string="Análisis de Citas por Gestor" type="bar">
+                    <field name="gestor_id" type="row"/>
+                    <field name="id" type="measure" operator="count"/>
+                </graph>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="imcitas.cliente_graph">
+            <field name="name">imcitas.cliente.graph</field>
+            <field name="model">imcitas.cliente</field>
+            <field name="arch" type="xml">
+                <graph string="Análisis de Clientes">
+                    <field name="country" type="row"/>
+                    <field name="id" type="measure" operator="count"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="imcitas.gestor_graph">
+            <field name="name">imcitas.gestor.graph</field>
+            <field name="model">imcitas.gestor</field>
+            <field name="arch" type="xml">
+                <graph string="Análisis de Gestores">
+                    <field name="name" type="row"/>
+                    <field name="id" type="measure" operator="count"/>
+                </graph>
+            </field>
+        </record>
+
         <!-- Action Window -->
         <record model="ir.actions.act_window" id="imcitas.consultoria_action_window">
             <field name="name">imcitas.consultoria.action_window</field>
@@ -237,6 +283,33 @@
             <field name="view_mode">tree,form,kanban</field>
         </record>
 
+        <record model="ir.actions.act_window" id="imcitas.consultoria_graph_action">
+            <field name="name">Análisis de Consultoría</field>
+            <field name="res_model">imcitas.consultoria</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="imcitas.consultoria_graph"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="imcitas.cita_graph_action">
+            <field name="name">Análisis de Citas</field>
+            <field name="res_model">imcitas.cita</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="imcitas.cita_graph"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="imcitas.cliente_graph_action">
+            <field name="name">Análisis de Clientes</field>
+            <field name="res_model">imcitas.cliente</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="imcitas.cliente_graph"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="imcitas.gestor_graph_action">
+            <field name="name">Análisis de Gestores</field>
+            <field name="res_model">imcitas.gestor</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="imcitas.gestor_graph"/>
+        </record>
 
 
 
@@ -249,6 +322,15 @@
         <menuitem name="Calculadora" id="imcitas.calculadora_menu" parent="imcitas.consultoria_menu" action="imcitas.calculadora_action_window"/>
         <menuitem name="Gestores" id="imcitas.gestor_menu" parent="imcitas.menu_root" action="imcitas.gestor_action_window"/>
         <menuitem name="Clientes" id="imcitas.cliente_menu" parent="imcitas.menu_root" action="imcitas.cliente_action_window"/>
+
+        <menuitem name="Añadir Cita" id="imcitas.cita_menuu" parent="imcitas.cita_menu" action="imcitas.cita_action_window"/>
+        <menuitem name="Añadir Gestores" id="imcitas.gestor_menuu" parent="imcitas.gestor_menu" action="imcitas.gestor_action_window"/>
+        <menuitem name="Añadir Clientes" id="imcitas.cliente_menuu" parent="imcitas.cliente_menu" action="imcitas.cliente_action_window"/>
+
+        <menuitem id="imcitas_consultoria_analysis_menu" name="Análisis de Consultoría" parent="imcitas.consultoria_menu" action="imcitas.consultoria_graph_action"/>
+        <menuitem id="imcitas_cita_analysis_menu" name="Análisis de Citas" parent="imcitas.cita_menu" action="imcitas.cita_graph_action"/>
+        <menuitem id="imcitas_cliente_analysis_menu" name="Análisis de Clientes" parent="imcitas.cliente_menu" action="imcitas.cliente_graph_action"/>
+        <menuitem id="imcitas_gestor_analysis_menu" name="Análisis de Gestores" parent="imcitas.gestor_menu" action="imcitas.gestor_graph_action"/>
 
     </data>
 </odoo>
