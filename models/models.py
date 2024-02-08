@@ -126,3 +126,5 @@ class Gestor(models.Model):
     name = fields.Char()
 
 
+
+
